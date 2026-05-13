@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy · Pond</title>
+    <meta
+      name="description"
+      content="What Pond collects, why, where it lives, and how to delete it."
+    />
+    <link rel="icon" type="image/png" href="./icon.png" />
+    <link rel="apple-touch-icon" href="./icon.png" />
+    <meta name="theme-color" content="#fbf4e8" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <a class="brand" href="./" aria-label="Pond home">
+          <img src="./icon.png" alt="" />
+          <span class="wordmark">pond</span>
+        </a>
+        <nav>
+          <a href="./terms.html">Terms</a>
+          <a href="./privacy.html">Privacy</a>
+        </nav>
+      </header>
+
+      <article>
+      <p class="kicker">What we collect, why, and how to delete it</p>
+      <h1>Privacy policy</h1>
+      <p class="subtitle">
+        <span>Last updated 13 May 2026</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lang-switch"><a href="./privacy.zh.html">中文版本</a></span>
+      </p>
+
+      <p>
+        This policy explains what data Pond collects, why, where it lives, and
+        what you can do about it. We try to keep it short, plain, and honest.
+        Pond is a small social app for sharing short video and photo "drops"
+        with people you choose. We aim to collect the minimum data the app
+        needs to work.
+      </p>
+
+      <h2>1. Data we collect</h2>
+
+      <h3>Account data</h3>
+      <ul>
+        <li>
+          <strong>Email and password, or Sign in with Apple.</strong> Used to
+          sign you in. Passwords are not stored by us — they are managed by
+          Firebase Authentication (Google) using salted hashes. If you choose
+          Sign in with Apple, Apple may return a private-relay email; we treat
+          that like any other email on file and don't try to unmask it.
+        </li>
+        <li>
+          <strong>Display name, username, optional bio, optional location
+          label, optional avatar.</strong> Visible to other Pond users you've
+          joined a pool with.
+        </li>
+        <li>
+          <strong>User ID (UID).</strong> An opaque identifier issued by
+          Firebase Authentication that ties your records together.
+        </li>
+      </ul>
+
+      <h3>Content you create</h3>
+      <ul>
+        <li>
+          <strong>Drops.</strong> Short videos and photos you record, plus
+          optional captions and a "muted" flag. Stored in Firebase Storage
+          under <code>clips/&lt;your-uid&gt;/</code>.
+        </li>
+        <li>
+          <strong>Avatars.</strong> Profile photos you upload, stored in
+          Firebase Storage under your UID.
+        </li>
+        <li>
+          <strong>Pool membership and metadata.</strong> Pool name, members,
+          invite code, and the drops shared into the pool.
+        </li>
+        <li>
+          <strong>Messages and reactions.</strong> Text replies, quoted clip
+          context, and emoji reactions on drops and messages.
+        </li>
+        <li>
+          <strong>Vlog exports.</strong> When you export a day from your
+          My pond, the server stitches that day's drops into a single mp4
+          and writes it to Firebase Storage under
+          <code>vlog-exports/&lt;your-uid&gt;/</code> so you can download or
+          share it. Only you can read your own exports.
+        </li>
+      </ul>
+
+      <h3>Device and notification data</h3>
+      <ul>
+        <li>
+          <strong>Push token.</strong> If you opt in to notifications, Pond
+          stores an Expo / FCM / APNs push token for the current device so we
+          can send "new drop" alerts. The token is tied to your UID and the
+          device, not to your name or email. You can disable it any time from
+          the Profile screen — we mark the token disabled and stop sending to
+          it. Tokens that fail repeatedly are removed automatically.
+        </li>
+        <li>
+          <strong>App version and platform (iOS / Android).</strong> Sent with
+          some requests so we can support old builds and roll out fixes.
+        </li>
+        <li>
+          <strong>Locally cached media.</strong> Drops you watch are cached on
+          your device under a 200 MB LRU cache to avoid re-downloading. Cache
+          stays on your device. You can clear it any time from
+          Profile → Storage.
+        </li>
+      </ul>
+
+      <h3>Crash and diagnostic data (Sentry)</h3>
+      <p>
+        We use <a href="https://sentry.io">Sentry</a> to record errors and
+        crashes so we can fix them. The Sentry SDK is initialized inside the
+        app and may capture:
+      </p>
+      <ul>
+        <li>The error and its stack trace.</li>
+        <li>
+          Non-personal context tags such as
+          <code>flow</code>, <code>reason</code>, <code>errorCode</code>,
+          <code>mediaKind</code>, <code>captionLength</code>,
+          <code>destinationLogCount</code>, <code>platform</code>,
+          and the app version.
+        </li>
+        <li>
+          Breadcrumbs — recent in-app events leading up to the error
+          (e.g. "camera became ready", "retrying capture").
+        </li>
+        <li>
+          Coarse device info supplied by the Sentry SDK (OS version, device
+          model class, locale).
+        </li>
+      </ul>
+      <p>
+        We deliberately do not attach person-tied identifiers (email,
+        username, UID, profile fields, person-tied IDs, tokens) to Sentry
+        events. Person-tied IDs are kept only in the device's developer
+        console under <code>__DEV__</code> and never leave the device. Sentry
+        events are stored on Sentry's infrastructure under our project and
+        retained according to Sentry's defaults (typically 90 days).
+      </p>
+
+      <h3>Analytics</h3>
+      <p>
+        Firebase Analytics is included as part of the Firebase SDK. Pond does
+        not currently use it to send custom analytics events; the only signals
+        that may be reported are the SDK's automatic events (e.g. first open,
+        session count) at the device level. We do not maintain any analytics
+        dashboards on user behavior. If we add product analytics in the
+        future, we will update this policy and announce the change in the app
+        before turning it on.
+      </p>
+
+      <h3>Things we do <em>not</em> collect</h3>
+      <ul>
+        <li>
+          Your contacts, calendars, or location (the optional "location label"
+          in your profile is just a free-text string you type in).
+        </li>
+        <li>
+          Advertising identifiers (IDFA / GAID). Pond shows no ads and runs no
+          third-party ad SDKs.
+        </li>
+        <li>Tracking across other apps or websites.</li>
+      </ul>
+
+      <h2>2. Where your data lives</h2>
+      <p>Pond runs on Firebase (Google) and a small set of services:</p>
+      <ul>
+        <li>
+          <strong>Firebase Authentication</strong> — email + password sign-in.
+        </li>
+        <li>
+          <strong>Cloud Firestore</strong> — profiles, pools, messages,
+          reactions, push-token records, rate-limit counters, remote-config.
+          Reads and writes are gated by Firestore Security Rules so only the
+          right user can see them.
+        </li>
+        <li>
+          <strong>Firebase Storage</strong> — drop video and photo files,
+          avatars, and server-compiled vlog exports of your My pond. Access
+          is gated by Storage Security Rules. Download URLs use Firebase
+          Storage tokens; the app caches them client-side for up to seven
+          days and re-issues if a token is rotated.
+        </li>
+        <li>
+          <strong>Firebase Cloud Messaging (FCM)</strong> and
+          <strong>Apple Push Notification service (APNs)</strong>, via Expo
+          Push, to deliver notifications.
+        </li>
+        <li>
+          <strong>Firebase Cloud Functions</strong> — server-side checks
+          (drop quota, finalization, feedback intake).
+        </li>
+        <li>
+          <strong>Sentry</strong> — error and crash reports, as described
+          above.
+        </li>
+        <li>
+          <strong>GitHub</strong> — feedback you submit through the in-app
+          form is filed as an issue on
+          <code>github.com/the-wolves-of-the-west/pond</code>. The title and
+          body of your message are visible in that public repository, so
+          please don't include anything private. We append your Firebase
+          user ID (UID) — an opaque identifier, not your email or username —
+          to the bottom of the issue body so we can route follow-ups to the
+          right account. Your email and username are not posted.
+        </li>
+      </ul>
+      <p>
+        Firebase data may be processed in any Google Cloud region. Sentry
+        events are processed on Sentry's infrastructure. Push tokens are
+        relayed through Expo, FCM, and APNs.
+      </p>
+
+      <h2>3. Why we collect it</h2>
+      <ul>
+        <li>
+          <strong>To run the app.</strong> Sign-in, posting drops, joining
+          pools, sending messages, showing your timeline — all require the
+          data above.
+        </li>
+        <li>
+          <strong>To deliver notifications</strong> you've opted into.
+        </li>
+        <li>
+          <strong>To diagnose crashes</strong> and fix bugs (Sentry).
+        </li>
+        <li>
+          <strong>To enforce safety and rate limits</strong> — feedback
+          rate-limit docs, drop quotas, etc., to keep the service usable for
+          everyone.
+        </li>
+        <li>
+          <strong>To respond to you</strong> when you send feedback or report
+          a problem.
+        </li>
+      </ul>
+      <p>
+        We do not sell your data. We do not use your data for advertising or
+        for training third-party AI models.
+      </p>
+
+      <h2>4. Who can see what</h2>
+      <ul>
+        <li>
+          Your <strong>profile fields</strong> (display name, username, bio,
+          location label, avatar) are visible to other Pond users who share a
+          pool with you.
+        </li>
+        <li>
+          Your <strong>drops, captions, and chat messages</strong> are visible
+          to the members of the pools you posted them into.
+        </li>
+        <li>
+          Your <strong>"My pond" timeline</strong> (the personal index of
+          every drop you've recorded) is visible only to you.
+        </li>
+        <li>
+          <strong>Email and push tokens</strong> are never shown to other
+          users.
+        </li>
+      </ul>
+
+      <h2>5. How long we keep it</h2>
+      <ul>
+        <li>
+          Profile, pool, drop, message, and reaction data — kept while your
+          account is active.
+        </li>
+        <li>
+          Push-token records — kept while the token is registered. Disabled
+          and stale tokens are removed.
+        </li>
+        <li>
+          Sentry events — retained per Sentry's project defaults (typically up
+          to 90 days).
+        </li>
+        <li>
+          Server logs — short-lived (typically 30 days) and used only for
+          operations and abuse defense.
+        </li>
+        <li>
+          Locally cached media — capped at 200 MB on your device and managed
+          by an LRU policy.
+        </li>
+      </ul>
+
+      <h2 id="account-deletion">6. Deleting your account and data</h2>
+      <p>You can delete your account at any time:</p>
+      <ol>
+        <li>
+          Open the app and go to <strong>Profile</strong>.
+        </li>
+        <li>
+          Tap <strong>Delete Account</strong> at the bottom of the screen.
+        </li>
+        <li>
+          Confirm. The app will start the deletion flow.
+        </li>
+      </ol>
+      <p>When you delete your account we:</p>
+      <ul>
+        <li>
+          Delete the Firebase Authentication record for your UID, so no one
+          can sign back in as you.
+        </li>
+        <li>
+          Delete your profile document, your "My pond" index, your registered
+          push tokens, and your membership in the pools you joined.
+        </li>
+        <li>
+          Delete every pool you created — including the drops and messages
+          other members posted into it. Members of those pools lose access
+          at the same time, so consider transferring or warning them before
+          you delete your account if a pool matters to them.
+        </li>
+        <li>
+          Delete your drop files, avatar, and any server-compiled vlog
+          exports from Firebase Storage under your UID.
+        </li>
+        <li>
+          Cancel rate-limit counters tied to your UID (feedback, interaction,
+          vlog export, and account-deletion).
+        </li>
+      </ul>
+      <p>
+        Some content cannot be removed automatically because it is intertwined
+        with other people's experience: <strong>chat messages and reactions
+        you've sent into pools</strong> may remain visible to that pool, with
+        your name replaced by "Former member"; <strong>cached copies of your
+        drops on other members' devices</strong> stay until their local cache
+        rotates them out (capped at 200 MB, LRU). Operational logs and
+        Sentry events age out per the schedule above.
+      </p>
+      <p>
+        Backups may keep copies for up to 30 days after deletion before they
+        are fully overwritten.
+      </p>
+      <p>
+        If you can't reach the in-app delete flow (for example, you've lost
+        access to the device), you can request deletion via the in-app
+        <strong>Send feedback</strong> form on another device. We will verify
+        ownership through your registered email and complete the deletion
+        within 30 days.
+      </p>
+
+      <h2>7. Children</h2>
+      <p>
+        Pond is not intended for children under 13. We do not knowingly
+        collect personal data from children under 13. If you believe a child
+        under 13 has created an account, please contact us and we will
+        delete it.
+      </p>
+
+      <h2>8. Security</h2>
+      <p>
+        We use HTTPS for all network traffic. Firestore and Storage Security
+        Rules restrict reads and writes to the right user, with separate
+        rules for <code>get</code> versus <code>list</code> on most
+        collections. Passwords are managed by Firebase Authentication, which
+        stores salted hashes. We log access at the SDK boundary only, with
+        person-tied identifiers (email, username, UID) kept out of remote
+        crash reports. No system is perfectly secure, but if a breach affects
+        you, we will notify you in line with applicable law.
+      </p>
+
+      <h2>9. Your rights</h2>
+      <p>
+        Depending on where you live (e.g. EEA, UK, California), you may have
+        the right to access, correct, port, or delete your personal data, and
+        to object to or restrict certain processing. To exercise any of these
+        rights, contact us through the in-app feedback form. We will verify
+        ownership through your registered email
+        before acting on a request.
+      </p>
+
+      <h2>10. International transfers</h2>
+      <p>
+        If you use Pond from outside the regions where Firebase, Sentry,
+        Expo, FCM, or APNs operate, your data will cross borders to those
+        regions. We rely on the providers' standard contractual clauses or
+        equivalent safeguards.
+      </p>
+
+      <h2>11. Changes to this policy</h2>
+      <p>
+        We may update this policy from time to time. The "Last updated" date
+        at the top reflects the current version. Material changes will be
+        announced in the app or by email before they take effect.
+      </p>
+
+      <h2>12. Contact</h2>
+      <p>
+        For privacy questions, data requests, or account deletion: open the
+        Profile tab and tap <strong>Send feedback</strong>.
+      </p>
+
+      </article>
+
+      <footer>
+        <span>Made with care · © Pond</span>
+        <span class="lang-switch"
+          ><a href="./privacy.zh.html">中文版本</a> · <a href="./">All documents</a></span
+        >
+      </footer>
+    </main>
+  </body>
+</html>

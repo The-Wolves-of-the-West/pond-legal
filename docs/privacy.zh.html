@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>隐私政策 · Pond</title>
+    <meta
+      name="description"
+      content="Pond 收集了哪些数据、为什么、存放在哪里，以及如何删除。"
+    />
+    <link rel="icon" type="image/png" href="./icon.png" />
+    <link rel="apple-touch-icon" href="./icon.png" />
+    <meta name="theme-color" content="#fbf4e8" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <a class="brand" href="./" aria-label="Pond 首页">
+          <img src="./icon.png" alt="" />
+          <span class="wordmark">pond</span>
+        </a>
+        <nav>
+          <a href="./terms.zh.html">服务条款</a>
+          <a href="./privacy.zh.html">隐私政策</a>
+        </nav>
+      </header>
+
+      <article>
+      <p class="kicker">我们收集什么、为什么、怎么删除</p>
+      <h1>隐私政策</h1>
+      <p class="subtitle">
+        <span>最近更新 2026 年 5 月 13 日</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lang-switch"><a href="./privacy.html">English version</a></span>
+      </p>
+
+      <p>
+        本政策说明 Pond 收集了哪些数据、为什么、存放在哪里，以及你可以做什么。我们尽量写得简短、直白、诚实。Pond 是一款小巧的社交应用，让你和自己挑选的朋友分享短视频和照片「水滴」。我们只收集让 App 正常运转所必需的最少数据。
+      </p>
+
+      <h2>1. 我们收集哪些数据</h2>
+
+      <h3>账号数据</h3>
+      <ul>
+        <li>
+          <strong>邮箱与密码，或使用 Apple 账号登录。</strong>用于登录。我们不存储你的密码 —— 由 Firebase Authentication（谷歌）使用加盐哈希托管。如果你选择「使用 Apple 账号登录」，Apple 可能会返回一个匿名转发邮箱（private relay），我们会把它当作普通邮箱保存，不会尝试还原成你的真实邮箱。
+        </li>
+        <li>
+          <strong>昵称、用户名、可选的个人简介、可选的位置标签、可选的头像。</strong>对与你共享圈子的 Pond 用户可见。
+        </li>
+        <li>
+          <strong>用户 ID（UID）。</strong>由 Firebase Authentication 颁发的不透明标识符，用于把你的数据关联起来。
+        </li>
+      </ul>
+
+      <h3>你创建的内容</h3>
+      <ul>
+        <li>
+          <strong>水滴（Drops）。</strong>你录制的短视频和照片，以及可选的文字说明、是否静音的标记。文件存放在 Firebase Storage 的
+          <code>clips/&lt;你的 UID&gt;/</code> 目录下。
+        </li>
+        <li>
+          <strong>头像。</strong>你上传的头像图片，存放在 Firebase Storage 的你的 UID 路径下。
+        </li>
+        <li>
+          <strong>圈子（pool）成员关系与元数据。</strong>圈子名称、成员、邀请码，以及共享到圈子里的水滴。
+        </li>
+        <li>
+          <strong>消息与表情回应。</strong>文字回复、引用的水滴上下文，以及对水滴和消息的表情回应。
+        </li>
+        <li>
+          <strong>Vlog 视频。</strong>当你从「我的水塘」导出某一天的内容时，服务端会把那天的水滴拼接成一段 mp4，保存到 Firebase Storage 的
+          <code>vlog-exports/&lt;你的 UID&gt;/</code> 路径下，方便你下载或分享。该路径下的内容只有你自己可以读取。
+        </li>
+      </ul>
+
+      <h3>设备与通知数据</h3>
+      <ul>
+        <li>
+          <strong>推送 Token。</strong>当你授权通知后，Pond 会保存当前设备的 Expo / FCM / APNs 推送 Token，用于发送「新水滴提醒」。Token 仅与你的 UID 和该设备绑定，不会与你的姓名或邮箱直接关联。你可以随时在「我的」页面关闭通知，我们会把 Token 标记为停用并不再发送；连续失败的 Token 会被自动移除。
+        </li>
+        <li>
+          <strong>App 版本与平台（iOS / Android）。</strong>随部分请求一起上报，便于我们支持旧版本和发布修复。
+        </li>
+        <li>
+          <strong>本地缓存的媒体。</strong>你看过的水滴会在本地缓存（最多 200 MB，LRU 淘汰），避免重复下载。这部分缓存只在你的设备上，可以随时在「我的」→「存储」里清除。
+        </li>
+      </ul>
+
+      <h3>崩溃与诊断数据（Sentry）</h3>
+      <p>
+        我们使用 <a href="https://sentry.io">Sentry</a> 收集报错与崩溃信息以便修复 Bug。Sentry SDK 在 App 内初始化，可能会上报：
+      </p>
+      <ul>
+        <li>错误对象与堆栈信息。</li>
+        <li>
+          非个人化的上下文标签，例如
+          <code>flow</code>、<code>reason</code>、<code>errorCode</code>、
+          <code>mediaKind</code>、<code>captionLength</code>、
+          <code>destinationLogCount</code>、<code>platform</code>、App 版本号等。
+        </li>
+        <li>
+          崩溃前的「面包屑」（breadcrumbs），即报错前应用内的近期事件（例如「相机就绪」、「重试拍摄」）。
+        </li>
+        <li>
+          Sentry SDK 自带的粗粒度设备信息（操作系统版本、设备机型类型、语言）。
+        </li>
+      </ul>
+      <p>
+        我们刻意不把可识别个人的标识符（邮箱、用户名、UID、个人资料字段、与个人绑定的 ID、Token）随事件一同上报至 Sentry。与个人绑定的 ID 仅在
+        <code>__DEV__</code> 模式下打印到本机开发者控制台，不会离开你的设备。Sentry 事件保存在 Sentry 平台上的我们的项目下，按 Sentry 默认策略保留（通常约 90 天）。
+      </p>
+
+      <h3>分析（Analytics）</h3>
+      <p>
+        我们使用了 Firebase SDK，其中包含 Firebase Analytics 模块。Pond 目前不会向其发送自定义分析事件；可能上报的仅是 SDK 自带的设备级自动事件（例如首次打开、会话数）。我们没有在内部维护用户行为分析仪表盘。如果未来增加产品分析，我们会先更新本政策并在 App 内告知。
+      </p>
+
+      <h3>我们<em>不</em>收集</h3>
+      <ul>
+        <li>
+          你的通讯录、日历或定位（个人资料里的「位置标签」只是你自己输入的一段文本）。
+        </li>
+        <li>
+          广告标识符（IDFA / GAID）。Pond 不展示广告，也不集成任何第三方广告 SDK。
+        </li>
+        <li>跨 App 或跨网站的追踪。</li>
+      </ul>
+
+      <h2>2. 数据存放在哪里</h2>
+      <p>Pond 主要运行在 Firebase（谷歌）以及少量第三方服务上：</p>
+      <ul>
+        <li>
+          <strong>Firebase Authentication</strong> —— 邮箱/密码登录。
+        </li>
+        <li>
+          <strong>Cloud Firestore</strong> —— 个人资料、圈子、消息、表情回应、推送 Token 记录、限频计数、Remote Config 等；通过 Firestore 安全规则限定只有相应用户可读写。
+        </li>
+        <li>
+          <strong>Firebase Storage</strong> —— 水滴的视频和照片、头像，以及服务端合成的「我的水塘」vlog 导出文件。通过 Storage 安全规则控制访问；下载链接使用 Firebase Storage 的下载令牌，App 在客户端缓存最多 7 天，令牌更换时会自动重新申请。
+        </li>
+        <li>
+          <strong>Firebase Cloud Messaging（FCM）</strong>与
+          <strong>Apple Push Notification service（APNs）</strong>，通过 Expo Push 渠道发送推送通知。
+        </li>
+        <li>
+          <strong>Firebase Cloud Functions</strong> —— 服务端校验（每日水滴配额、内容定稿、反馈接收等）。
+        </li>
+        <li>
+          <strong>Sentry</strong> —— 崩溃与错误上报，详见上文。
+        </li>
+        <li>
+          <strong>GitHub</strong> —— 你在 App 内提交的反馈会自动在
+          <code>github.com/the-wolves-of-the-west/pond</code> 创建一个 Issue。Issue 的标题与正文在公开仓库可见，请不要包含隐私信息。我们会在 Issue 正文末尾附上你的 Firebase 用户 ID（UID，一个不透明的标识符，不是邮箱或用户名），方便我们对回应到对的账号；我们不会把你的邮箱或用户名带到 Issue 上。
+        </li>
+      </ul>
+      <p>
+        Firebase 数据可能在任意 Google Cloud 区域处理；Sentry 事件在 Sentry 平台上处理；推送 Token 经由 Expo、FCM 与 APNs 中转。
+      </p>
+
+      <h2>3. 为什么收集这些数据</h2>
+      <ul>
+        <li>
+          <strong>让 App 正常运转。</strong>登录、发水滴、加圈子、发消息、看时间线 —— 都需要上述数据。
+        </li>
+        <li>
+          <strong>给你发送你授权的通知。</strong>
+        </li>
+        <li>
+          <strong>排查崩溃和修复 Bug</strong>（Sentry）。
+        </li>
+        <li>
+          <strong>执行安全与限频策略</strong> —— 例如反馈次数限制、每日水滴配额，以保证服务对所有人可用。
+        </li>
+        <li>
+          <strong>回复你</strong> 的反馈与问题。
+        </li>
+      </ul>
+      <p>
+        我们不会出售你的数据；不会将你的数据用于广告投放，也不会用来训练任何第三方 AI 模型。
+      </p>
+
+      <h2>4. 谁能看到什么</h2>
+      <ul>
+        <li>
+          你的<strong>个人资料字段</strong>（昵称、用户名、个人简介、位置标签、头像）对与你共享圈子的 Pond 用户可见。
+        </li>
+        <li>
+          你的<strong>水滴、说明与聊天消息</strong>对你发布到的圈子的成员可见。
+        </li>
+        <li>
+          你的<strong>「我的水塘」时间线</strong>（个人记录的所有水滴的索引）只有你自己能看到。
+        </li>
+        <li>
+          <strong>邮箱与推送 Token</strong> 不会展示给其他用户。
+        </li>
+      </ul>
+
+      <h2>5. 数据保留多久</h2>
+      <ul>
+        <li>
+          个人资料、圈子、水滴、消息、表情等数据 —— 在你的账号有效期内保留。
+        </li>
+        <li>
+          推送 Token —— 在 Token 注册期间保留；停用或失效的 Token 会被移除。
+        </li>
+        <li>
+          Sentry 事件 —— 按 Sentry 项目默认策略保留（通常约 90 天）。
+        </li>
+        <li>
+          服务端日志 —— 短期保留（通常 30 天），仅用于运营与对抗滥用。
+        </li>
+        <li>
+          本地缓存媒体 —— 设备本地最多 200 MB，按 LRU 自动淘汰。
+        </li>
+      </ul>
+
+      <h2 id="account-deletion">6. 删除账号与数据</h2>
+      <p>你可以随时删除自己的账号：</p>
+      <ol>
+        <li>打开 App，进入<strong>「我的」</strong>页面。</li>
+        <li>点击页面底部的<strong>「注销账号」</strong>。</li>
+        <li>确认后，App 会发起删除流程。</li>
+      </ol>
+      <p>当你删除账号后，我们会：</p>
+      <ul>
+        <li>从 Firebase Authentication 中删除你的 UID 记录，让任何人都无法再以你的身份登录。</li>
+        <li>删除你的个人资料文档、「我的水塘」索引、所有已注册的推送 Token，以及你加入的圈子里的成员关系。</li>
+        <li>删除你创建的所有圈子 —— 包括其他成员发到这些圈子里的水滴和消息。这些圈子的成员会同时失去访问权限，所以如果某个圈子对他们很重要，最好在注销前先告知或转交。</li>
+        <li>删除 Firebase Storage 中你的 UID 下的水滴、头像，以及服务端合成的 vlog 导出文件。</li>
+        <li>清理与你的 UID 相关的限频计数文档（反馈、互动通知、vlog 导出、注销请求）。</li>
+      </ul>
+      <p>
+        有些内容由于与他人的体验交织在一起，无法自动消除：你<strong>发到圈子里的消息与表情回应</strong>仍可能对该圈子可见，但你的名字会被替换为「已离开」；<strong>其他成员设备上对你水滴的本地缓存</strong>会保留到他们的本地缓存按 LRU 自然淘汰为止（上限 200 MB）。运维日志与 Sentry 事件按上文的时限自然过期。
+      </p>
+      <p>备份系统中可能还会保留最多 30 天的副本，之后会被覆盖。</p>
+      <p>
+        如果你已经无法进入 App 内的注销流程（例如设备丢失），可以在另一台设备上通过 App 内的 <strong>和我们聊聊</strong> 功能申请删除。我们会通过你的注册邮箱核实身份，并在 30 天内完成删除。
+      </p>
+
+      <h2>7. 关于儿童</h2>
+      <p>
+        Pond 不面向 13 周岁以下儿童。我们不会有意收集 13 周岁以下儿童的个人信息。如果你认为有不满 13 岁的儿童创建了账号，请联系我们，我们会删除该账号。
+      </p>
+
+      <h2>8. 安全</h2>
+      <p>
+        所有网络流量均使用 HTTPS。Firestore 与 Storage 安全规则限制读写权限到对应用户，并在大多数集合上区分 <code>get</code> 与 <code>list</code>。密码由 Firebase Authentication 管理，存为加盐哈希。我们仅在 SDK 边界做日志记录，可识别个人的标识符（邮箱、用户名、UID）不会带入远程崩溃报告。没有系统是完美安全的，如发生影响你的安全事件，我们会按适用法律的要求通知你。
+      </p>
+
+      <h2>9. 你的权利</h2>
+      <p>
+        视你所在地区的法律（例如欧盟/英国 GDPR、美国加州 CCPA 等），你可能享有访问、更正、携带、删除个人数据，以及反对/限制特定处理的权利。如需行使，请通过 App 内反馈功能联系我们；我们会通过你的注册邮箱核实身份后再处理请求。
+      </p>
+
+      <h2>10. 跨境传输</h2>
+      <p>
+        如果你在 Firebase、Sentry、Expo、FCM、APNs 服务覆盖的区域之外使用 Pond，你的数据会跨境传输到这些区域。我们依赖相关服务商的标准合同条款（SCC）或同等措施作为合规保障。
+      </p>
+
+      <h2>11. 政策变更</h2>
+      <p>
+        我们可能不定期更新本政策，最新版本以页面顶部的「最近更新」日期为准。涉及实质性变更时，会先在 App 内或通过邮件告知。
+      </p>
+
+      <h2>12. 联系我们</h2>
+      <p>
+        如有隐私相关问题、数据请求或注销诉求，请打开「我的」页面并点击 <strong>和我们聊聊</strong>。
+      </p>
+
+      </article>
+
+      <footer>
+        <span>用心制作 · © Pond</span>
+        <span class="lang-switch"
+          ><a href="./privacy.html">English version</a> · <a href="./">所有文档</a></span
+        >
+      </footer>
+    </main>
+  </body>
+</html>
