@@ -74,8 +74,8 @@
           <code>vlog-exports/&lt;你的 UID&gt;/</code> 路径下，方便你下载或分享。该路径下的内容只有你自己可以读取。
         </li>
         <li>
-          <strong>举报与拉黑记录。</strong>当你对水滴、消息或圈子成员点击<strong>「举报」</strong>时，我们会保存你提交的举报记录（被举报的对象、所在圈子、原因）。当你<strong>「拉黑」</strong>某位用户时，我们会把对方的 UID 保存在
-          <code>users/&lt;你的 UID&gt;/blockedUsers/</code> 下，以便 App 把对方的内容从你眼前隐藏。你可以随时在「我的 → 已拉黑用户」中查看与解除拉黑。
+          <strong>举报与屏蔽记录。</strong>当你对水滴、消息或圈子成员点击<strong>「举报」</strong>时，我们会保存你提交的举报记录（被举报的对象、所在圈子、原因）。当你<strong>「屏蔽」</strong>某位用户时，我们会把对方的 UID 保存在
+          <code>users/&lt;你的 UID&gt;/blockedUsers/</code> 下，以便 App 把对方的内容从你眼前隐藏。你可以随时在「我的 → 已屏蔽的用户」中查看与解除屏蔽。
         </li>
       </ul>
 
@@ -142,7 +142,7 @@
           <strong>Firebase Authentication</strong> —— 邮箱/密码登录。
         </li>
         <li>
-          <strong>Cloud Firestore</strong> —— 个人资料、圈子、消息、表情回应、推送 Token 记录、限频计数、Remote Config，以及你的拉黑用户列表；通过 Firestore 安全规则限定只有相应用户可读写。
+          <strong>Cloud Firestore</strong> —— 个人资料、圈子、消息、表情回应、推送 Token 记录、限频计数、Remote Config，以及你的屏蔽用户列表；通过 Firestore 安全规则限定只有相应用户可读写。
         </li>
         <li>
           <strong>Firebase Storage</strong> —— 水滴的视频和照片、头像，以及服务端合成的「我的水塘」vlog 导出文件。通过 Storage 安全规则控制访问；下载链接使用 Firebase Storage 的下载令牌，App 在客户端缓存最多 7 天，令牌更换时会自动重新申请。
@@ -199,7 +199,7 @@
           你的<strong>「我的水塘」时间线</strong>（个人记录的所有水滴的索引）只有你自己能看到。
         </li>
         <li>
-          你的<strong>拉黑用户列表</strong>只有你自己能看到。
+          你的<strong>屏蔽用户列表</strong>只有你自己能看到。
         </li>
         <li>
           <strong>邮箱与推送 Token</strong> 不会展示给其他用户。
@@ -238,7 +238,7 @@
       <p>当你删除账号后，我们会：</p>
       <ul>
         <li>从 Firebase Authentication 中删除你的 UID 记录，让任何人都无法再以你的身份登录。</li>
-        <li>删除你的个人资料文档、「我的水塘」索引、所有已注册的推送 Token、你的拉黑用户列表，以及你加入的圈子里的成员关系。</li>
+        <li>删除你的个人资料文档、「我的水塘」索引、所有已注册的推送 Token、你的屏蔽用户列表，以及你加入的圈子里的成员关系。</li>
         <li>删除你创建的所有圈子 —— 包括其他成员发到这些圈子里的水滴和消息。这些圈子的成员会同时失去访问权限，所以如果某个圈子对他们很重要，最好在注销前先告知或转交。</li>
         <li>删除 Firebase Storage 中你的 UID 下的水滴、头像，以及服务端合成的 vlog 导出文件。</li>
         <li>清理与你的 UID 相关的限频计数文档（反馈、互动通知、vlog 导出、注销请求）。</li>
