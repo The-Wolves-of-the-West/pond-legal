@@ -30,7 +30,7 @@
       <p class="kicker">What we collect, why, and how to delete it</p>
       <h1>Privacy policy</h1>
       <p class="subtitle">
-        <span>Last updated 13 May 2026</span>
+        <span>Last updated 14 May 2026</span>
         <span class="dot" aria-hidden="true"></span>
         <span class="lang-switch"><a href="./privacy.zh.html">中文版本</a></span>
       </p>
@@ -68,9 +68,15 @@
       <h3>Content you create</h3>
       <ul>
         <li>
-          <strong>Drops.</strong> Short videos and photos you record, plus
-          optional captions and a "muted" flag. Stored in Firebase Storage
-          under <code>clips/&lt;your-uid&gt;/</code>.
+          <strong>Drops.</strong> Short videos (with audio) and photos you
+          record using the in-app camera, or images you pick from your
+          device's photo library through the system picker. Recording uses
+          your <strong>camera</strong> and, for videos, your
+          <strong>microphone</strong> — both gated by the system permission
+          prompts at first use, and revocable at any time from your device
+          settings. Each drop has an optional caption and a "muted" flag
+          that hides audio during playback. Files are stored in Firebase
+          Storage under <code>clips/&lt;your-uid&gt;/</code>.
         </li>
         <li>
           <strong>Avatars.</strong> Profile photos you upload, stored in
@@ -90,6 +96,15 @@
           and writes it to Firebase Storage under
           <code>vlog-exports/&lt;your-uid&gt;/</code> so you can download or
           share it. Only you can read your own exports.
+        </li>
+        <li>
+          <strong>Moderation reports and blocks.</strong> When you tap
+          <strong>Report</strong> on a drop, message, or pool member, we
+          store the report you submitted (target, pool, and reason). When you
+          <strong>block</strong> another user, we store their UID under
+          <code>users/&lt;your-uid&gt;/blockedUsers/</code> so the app can
+          hide their content from you. You can review and unblock from
+          Profile → Blocked Users.
         </li>
       </ul>
 
@@ -112,6 +127,12 @@
           your device under a 200 MB LRU cache to avoid re-downloading. Cache
           stays on your device. You can clear it any time from
           Profile → Storage.
+        </li>
+        <li>
+          <strong>Saving drops to your Photos library.</strong> If you choose
+          to save a drop or a vlog export, Pond writes a copy into your
+          device's Photos library. The saved copy lives only on your device;
+          Pond does not read your Photos library back.
         </li>
       </ul>
 
@@ -150,13 +171,10 @@
 
       <h3>Analytics</h3>
       <p>
-        Firebase Analytics is included as part of the Firebase SDK. Pond does
-        not currently use it to send custom analytics events; the only signals
-        that may be reported are the SDK's automatic events (e.g. first open,
-        session count) at the device level. We do not maintain any analytics
-        dashboards on user behavior. If we add product analytics in the
-        future, we will update this policy and announce the change in the app
-        before turning it on.
+        Pond does not initialize any product analytics SDK and does not
+        record analytics events about your behavior. If we add product
+        analytics in the future, we will update this policy and announce
+        the change in the app before turning it on.
       </p>
 
       <h3>Things we do <em>not</em> collect</h3>
@@ -180,9 +198,9 @@
         </li>
         <li>
           <strong>Cloud Firestore</strong> — profiles, pools, messages,
-          reactions, push-token records, rate-limit counters, remote-config.
-          Reads and writes are gated by Firestore Security Rules so only the
-          right user can see them.
+          reactions, push-token records, rate-limit counters, remote-config,
+          and your blocked-users list. Reads and writes are gated by
+          Firestore Security Rules so only the right user can see them.
         </li>
         <li>
           <strong>Firebase Storage</strong> — drop video and photo files,
@@ -198,7 +216,8 @@
         </li>
         <li>
           <strong>Firebase Cloud Functions</strong> — server-side checks
-          (drop quota, finalization, feedback intake).
+          (drop quota, finalization, feedback intake, moderation-report
+          intake).
         </li>
         <li>
           <strong>Sentry</strong> — error and crash reports, as described
@@ -206,12 +225,16 @@
         </li>
         <li>
           <strong>GitHub</strong> — feedback you submit through the in-app
-          form is filed as a public GitHub issue. The title and
-          body of your message are visible in that public repository, so
-          please don't include anything private. We append your Firebase
-          user ID (UID) — an opaque identifier, not your email or username —
-          to the bottom of the issue body so we can route follow-ups to the
-          right account. Your email and username are not posted.
+          <strong>Send feedback</strong> form is filed as an issue in a
+          <em>private</em> GitHub repository that only the Pond team can
+          read. We append your Firebase user ID (UID) — an opaque identifier,
+          not your email or username — to the bottom of the issue body so we
+          can route follow-ups to the right account. Your email and username
+          are not posted. Moderation reports you file from inside the app
+          (the <strong>Report</strong> action on a drop, message, or pool
+          member) are filed into the same private repository and additionally
+          include the reporter's UID, the reported user's UID, the pool ID,
+          and the reason you selected.
         </li>
       </ul>
       <p>
@@ -235,8 +258,8 @@
         </li>
         <li>
           <strong>To enforce safety and rate limits</strong> — feedback
-          rate-limit docs, drop quotas, etc., to keep the service usable for
-          everyone.
+          rate-limit docs, drop quotas, content filtering, and moderation
+          reports, to keep the service usable for everyone.
         </li>
         <li>
           <strong>To respond to you</strong> when you send feedback or report
@@ -262,6 +285,9 @@
         <li>
           Your <strong>"My pond" timeline</strong> (the personal index of
           every drop you've recorded) is visible only to you.
+        </li>
+        <li>
+          Your <strong>blocked-users list</strong> is visible only to you.
         </li>
         <li>
           <strong>Email and push tokens</strong> are never shown to other
@@ -291,6 +317,12 @@
           Locally cached media — capped at 200 MB on your device and managed
           by an LRU policy.
         </li>
+        <li>
+          Moderation reports — kept as long as we need them to review the
+          report and (where warranted) act on it. After action they may be
+          retained in our private issue tracker for audit and pattern
+          analysis.
+        </li>
       </ul>
 
       <h2 id="account-deletion">6. Deleting your account and data</h2>
@@ -314,7 +346,8 @@
         </li>
         <li>
           Delete your profile document, your "My pond" index, your registered
-          push tokens, and your membership in the pools you joined.
+          push tokens, your blocked-users list, and your membership in the
+          pools you joined.
         </li>
         <li>
           Delete every pool you created — including the drops and messages
@@ -331,6 +364,12 @@
           vlog export, and account-deletion).
         </li>
       </ul>
+      <p>
+        When you confirm deletion in the app, the steps above run
+        immediately — there is no holding period. The 30-day window further
+        down applies only to the offline fallback for users who can't reach
+        the in-app flow, and to backup-tape rotation.
+      </p>
       <p>
         Some content cannot be removed automatically because it is intertwined
         with other people's experience: <strong>chat messages and reactions
@@ -359,6 +398,13 @@
         under 13 has created an account, please contact us and we will
         delete it.
       </p>
+      <p>
+        Some regions set a higher digital age of consent — in parts of the
+        EEA, for example, processing a minor's personal data requires
+        parental consent below age 16. In those regions you must meet your
+        local minimum age, or have a parent or guardian's consent, to use
+        Pond.
+      </p>
 
       <h2>8. Security</h2>
       <p>
@@ -380,6 +426,13 @@
         rights, contact us through the in-app feedback form. We will verify
         ownership through your registered email
         before acting on a request.
+      </p>
+      <p>
+        California residents: Pond does not "sell" or "share" your personal
+        information as those terms are defined under the CCPA/CPRA, and we
+        have not done so in the preceding 12 months. You have the right to
+        know, delete, correct, and limit the use of your information; the
+        paragraph above describes how to exercise it.
       </p>
 
       <h2>10. International transfers</h2>
